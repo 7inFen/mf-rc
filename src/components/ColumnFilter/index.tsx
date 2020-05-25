@@ -26,7 +26,7 @@ const StyledFilterBtn = styled(Button)`
   } */
 `
  
-export default class CustomColumnBtn extends Component {
+export default class CustomColumn extends Component {
   static propTypes = {
     data: PropTypes.array,
     onChange: PropTypes.func,
