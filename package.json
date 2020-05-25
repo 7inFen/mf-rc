@@ -19,6 +19,11 @@
     "styled-components": "^5.1.0",
     "typescript": "~3.7.2"
   },
+  "peerDependencies": {
+    "react": ">=16.9.0",
+    "react-dom": ">=16.9.0",
+    "antd": ">=4.2.4"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -27,6 +32,7 @@
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public"
   },
+  "module": "es/index.js",
   "eslintConfig": {
     "extends": "react-app"
   },
