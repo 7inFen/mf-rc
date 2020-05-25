@@ -18,7 +18,6 @@ var __extends = (this && this.__extends) || (function () {
 })();
 exports.__esModule = true;
 var react_1 = require("react");
-var prop_types_1 = require("prop-types");
 var antd_1 = require("antd");
 var styled_components_1 = require("styled-components");
 var classnames_1 = require("classnames");
@@ -133,13 +132,6 @@ var CustomColumn = (function (_super) {
         return (react_1["default"].createElement(antd_1.Popover, { trigger: 'click', content: this.dropDownContent(), overlayClassName: 'column-filter' }, children || (react_1["default"].createElement(StyledFilterBtn, { className: classnames_1["default"]({
                 hasFilter: this.checkHasFilter()
             }) }, "Toggle"))));
-    };
-    CustomColumn.propTypes = {
-        data: prop_types_1["default"].array,
-        onChange: prop_types_1["default"].func,
-        width: prop_types_1["default"].number,
-        contentWidth: prop_types_1["default"].number,
-        columnKey: prop_types_1["default"].string
     };
     return CustomColumn;
 }(react_1.Component));

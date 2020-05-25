@@ -27,13 +27,13 @@ const StyledFilterBtn = styled(Button)`
 `
  
 export default class CustomColumn extends Component {
-  static propTypes = {
-    data: PropTypes.array,
-    onChange: PropTypes.func,
-    width: PropTypes.number,
-    contentWidth: PropTypes.number,
-    columnKey: PropTypes.string,
-  }
+  // static propTypes = {
+  //   data: PropTypes.array,
+  //   onChange: PropTypes.func,
+  //   width: PropTypes.number,
+  //   contentWidth: PropTypes.number,
+  //   columnKey: PropTypes.string,
+  // }
  
   constructor (props) {
     super(props)

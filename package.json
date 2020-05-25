@@ -11,6 +11,7 @@
     "build-storybook": "build-storybook -s public",
     "build-rc": "tsc src/components/index.ts --outDir es --d --allowJs --jsx react --lib es5 --removeComments --skipLibCheck"
   },
+  "main": "es/index.js",
   "module": "es/index.js",
   "eslintConfig": {
     "extends": "react-app"

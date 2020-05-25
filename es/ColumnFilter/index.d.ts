@@ -1,12 +1,5 @@
 import { Component } from 'react';
 export default class CustomColumn extends Component {
-    static propTypes: {
-        data: any;
-        onChange: any;
-        width: any;
-        contentWidth: any;
-        columnKey: any;
-    };
     constructor(props: any);
     static getDerivedStateFromProps(nextProps: any, prevState: any): {
         value: any[];
