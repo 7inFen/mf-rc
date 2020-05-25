@@ -171,7 +171,7 @@ export default class CustomColumnBtn extends Component {
       >
         {children || (
           <StyledFilterBtn
-            type='primary'
+            // type='primary'
             className={
               cx({
                 hasFilter: this.checkHasFilter()
