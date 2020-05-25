@@ -1,10 +1,9 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import * as React from 'react'
 import { Checkbox, Popover, Button } from 'antd'
 // import Button from './Button'
-import styled from 'styled-components'
-import cx from 'classnames'
-import storage from 'store'
+import * as styled from 'styled-components'
+import * as cx from 'classnames'
+import * as storage from 'store'
 // import { ColumnSuffixIcon } from '../styled/suffixIcon'
  
 // let getItemValue = item => item.value || item.dataIndex || item.key
@@ -26,7 +25,7 @@ const StyledFilterBtn = styled(Button)`
   } */
 `
  
-export default class CustomColumn extends Component {
+export default class CustomColumn extends React.Component {
   // static propTypes = {
   //   data: PropTypes.array,
   //   onChange: PropTypes.func,

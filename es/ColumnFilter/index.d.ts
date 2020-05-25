@@ -1,5 +1,5 @@
-import { Component } from 'react';
-export default class CustomColumn extends Component {
+import * as React from 'react';
+export default class CustomColumn extends React.Component {
     constructor(props: any);
     static getDerivedStateFromProps(nextProps: any, prevState: any): {
         value: any[];
