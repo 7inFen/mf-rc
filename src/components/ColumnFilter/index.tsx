@@ -1,40 +1,30 @@
 import React from 'react'
 import { Checkbox, Popover, Button } from 'antd'
-// import Button from './Button'
-import styled from 'styled-components'
 import cx from 'classnames'
 import storage from 'store'
-// import { ColumnSuffixIcon } from '../styled/suffixIcon'
- 
-// let getItemValue = item => item.value || item.dataIndex || item.key
-let getItemValue = item => item.key || item.value || item.dataIndex
+
+interface IComponentProps {
+  data: IItem[],
+  onChange: (list: IItem[], value: string[]) => void,
+  columnKey?: string
+}
+
+interface IItem {
+  dataIndex: string,
+  key?: string,
+  value?: string,
+  unfilter?: boolean,
+  hide?: boolean,
+  [propName: string]: any
+}
+
+let getItemValue = (item: IItem): string => item.key || item.value || item.dataIndex
  
 const STORAGE_KEY = 'columnFilter'
- 
-const StyledFilterBtn = styled(Button)`
-  /* padding: 0 !important;
-  width: 40px !important;
-  height: 40px !important;
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
-  border: none !important;
-  background: #014F89;
-  &.hasFilter {
-    background: #014F89 !important;
-  } */
-`
- 
-export default class CustomColumn extends React.Component {
-  // static propTypes = {
-  //   data: PropTypes.array,
-  //   onChange: PropTypes.func,
-  //   width: PropTypes.number,
-  //   contentWidth: PropTypes.number,
-  //   columnKey: PropTypes.string,
-  // }
- 
-  constructor (props) {
+
+export default class CustomColumn extends React.Component<IComponentProps, any> {
+  KEY: any
+  constructor(props: IComponentProps) {
     super(props)
     this.KEY = window.location.pathname
     this.state = {
@@ -44,20 +34,15 @@ export default class CustomColumn extends React.Component {
       columnKey: ''
     }
   }
-
-  componentDidMount() {
-    console.log('in columnFilter')
-  }
-  
  
-  static getDerivedStateFromProps (nextProps, prevState) {
+  static getDerivedStateFromProps(nextProps: IComponentProps, prevState: any) {
     const { data, onChange, columnKey } = nextProps
     const { columnKey: columnKeyInState, KEY } = prevState
     if (columnKey !== columnKeyInState) {
       const columnFilter = storage.get(STORAGE_KEY) || {}
       const hideValue = columnFilter[columnKey || KEY] || []
-      const showedCol = []
-      data.forEach(item => {
+      const showedCol: IItem[] = []
+      data.forEach((item: IItem): void => {
         if (item.unfilter || (!hideValue.includes(getItemValue(item)) && !item.hide)) {
           showedCol.push(item)
         }
@@ -93,7 +78,7 @@ export default class CustomColumn extends React.Component {
       // 未被隐藏的column
       result = data.filter(item => !item.hide)
     }
-    const defaultValue = []
+    const defaultValue: string[] = []
     result.forEach(col => {
       if (!col.unfilter) {
         defaultValue.push(getItemValue(col))
@@ -106,16 +91,16 @@ export default class CustomColumn extends React.Component {
     onChange(result, defaultValue)
   }
  
-  setStorage = values => {
+  setStorage = (values: string[]): void => {
     const columnFilter = storage.get(STORAGE_KEY) || {}
     columnFilter[this.props.columnKey || this.KEY] = values
     storage.set(STORAGE_KEY, columnFilter)
   }
  
-  handleChange = value => {
+  handleChange = (value: any[]): void => {
     const { data = [] } = this.props
-    const showedCol = []
-    const hideValue = []
+    const showedCol: IItem[] = []
+    const hideValue: string[] = []
     data.forEach(item => {
       if (item.unfilter || value.includes(getItemValue(item))) {
         showedCol.push(item)
@@ -165,6 +150,20 @@ export default class CustomColumn extends React.Component {
  
   render () {
     const { children } = this.props
+    const renderElement: any = (
+      children || (
+        <Button
+          type='primary'
+          className={
+            cx({
+              hasFilter: this.checkHasFilter()
+            })
+          }
+        >
+          Toggle
+        </Button>
+      )
+    )
     return (
       <Popover
         // title='选择展示项'
@@ -173,18 +172,7 @@ export default class CustomColumn extends React.Component {
         content={this.dropDownContent()}
         overlayClassName='column-filter'
       >
-        {children || (
-          <StyledFilterBtn
-            type='primary'
-            className={
-              cx({
-                hasFilter: this.checkHasFilter()
-              })
-            }
-          >
-            Toggle
-          </StyledFilterBtn>
-        )}
+        {renderElement}
       </Popover>
     )
   }

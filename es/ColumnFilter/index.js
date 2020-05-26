@@ -1,7 +1,3 @@
-var __makeTemplateObject = (this && this.__makeTemplateObject) || function (cooked, raw) {
-    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
-    return cooked;
-};
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -17,12 +13,10 @@ var __extends = (this && this.__extends) || (function () {
 })();
 import React from 'react';
 import { Checkbox, Popover, Button } from 'antd';
-import styled from 'styled-components';
 import cx from 'classnames';
 import storage from 'store';
 var getItemValue = function (item) { return item.key || item.value || item.dataIndex; };
 var STORAGE_KEY = 'columnFilter';
-var StyledFilterBtn = styled(Button)(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  /* padding: 0 !important;\n  width: 40px !important;\n  height: 40px !important;\n  display: flex !important;\n  justify-content: center;\n  align-items: center;\n  border: none !important;\n  background: #014F89;\n  &.hasFilter {\n    background: #014F89 !important;\n  } */\n"], ["\n  /* padding: 0 !important;\n  width: 40px !important;\n  height: 40px !important;\n  display: flex !important;\n  justify-content: center;\n  align-items: center;\n  border: none !important;\n  background: #014F89;\n  &.hasFilter {\n    background: #014F89 !important;\n  } */\n"])));
 var CustomColumn = (function (_super) {
     __extends(CustomColumn, _super);
     function CustomColumn(props) {
@@ -103,9 +97,6 @@ var CustomColumn = (function (_super) {
         };
         return _this;
     }
-    CustomColumn.prototype.componentDidMount = function () {
-        console.log('in columnFilter');
-    };
     CustomColumn.getDerivedStateFromProps = function (nextProps, prevState) {
         var data = nextProps.data, onChange = nextProps.onChange, columnKey = nextProps.columnKey;
         var columnKeyInState = prevState.columnKey, KEY = prevState.KEY;
@@ -130,11 +121,11 @@ var CustomColumn = (function (_super) {
     };
     CustomColumn.prototype.render = function () {
         var children = this.props.children;
-        return (React.createElement(Popover, { trigger: 'click', content: this.dropDownContent(), overlayClassName: 'column-filter' }, children || (React.createElement(StyledFilterBtn, { type: 'primary', className: cx({
+        var renderElement = (children || (React.createElement(Button, { type: 'primary', className: cx({
                 hasFilter: this.checkHasFilter()
-            }) }, "Toggle"))));
+            }) }, "Toggle")));
+        return (React.createElement(Popover, { trigger: 'click', content: this.dropDownContent(), overlayClassName: 'column-filter' }, renderElement));
     };
     return CustomColumn;
 }(React.Component));
 export default CustomColumn;
-var templateObject_1;

@@ -1,7 +1,7 @@
 {
   "name": "mf-rc",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -9,7 +9,8 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
-    "build-rc": "tsc src/components/index.ts --outDir es --jsx react --lib esnext --module esnext --d --allowJs --esModuleInterop --removeComments --skipLibCheck --allowSyntheticDefaultImports"
+    "build-rc": "npm run remove-dist && tsc src/components/index.ts --outDir es --jsx react -target es5 --lib dom,dom.iterable,esnext --module esnext --moduleResolution node --d --allowJs --esModuleInterop --removeComments --skipLibCheck --allowSyntheticDefaultImports",
+    "remove-dist": "rimraf es"
   },
   "main": "es/index.js",
   "module": "es/index.js",
@@ -32,10 +33,12 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "@types/classnames": "^2.2.10",
     "@types/jest": "^24.0.0",
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "@types/store": "^2.0.2",
     "antd": "^4.2.4",
     "classnames": "^2.2.6",
     "react": "^16.13.1",
@@ -56,6 +59,7 @@
     "@storybook/addon-links": "^5.3.18",
     "@storybook/addons": "^5.3.18",
     "@storybook/preset-create-react-app": "^2.1.2",
-    "@storybook/react": "^5.3.18"
+    "@storybook/react": "^5.3.18",
+    "rimraf": "^3.0.2"
   }
 }
