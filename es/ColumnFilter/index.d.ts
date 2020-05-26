@@ -1,6 +1,7 @@
-import * as React from 'react';
+import React from 'react';
 export default class CustomColumn extends React.Component {
     constructor(props: any);
+    componentDidMount(): void;
     static getDerivedStateFromProps(nextProps: any, prevState: any): {
         value: any[];
         hideValue: any;

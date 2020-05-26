@@ -9,7 +9,7 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
-    "build-rc": "tsc src/components/index.ts --outDir es --d --allowJs --jsx react --lib es5 --removeComments --skipLibCheck --allowSyntheticDefaultImports"
+    "build-rc": "tsc src/components/index.ts --outDir es --jsx react --lib esnext --module esnext --d --allowJs --esModuleInterop --removeComments --skipLibCheck --allowSyntheticDefaultImports"
   },
   "main": "es/index.js",
   "module": "es/index.js",

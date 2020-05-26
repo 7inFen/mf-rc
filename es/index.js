@@ -1,4 +1,1 @@
-"use strict";
-exports.__esModule = true;
-var ColumnFilter_1 = require("./ColumnFilter");
-exports.ColumnFilter = ColumnFilter_1["default"];
+export { default as ColumnFilter } from './ColumnFilter/index';

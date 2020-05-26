@@ -1,9 +1,9 @@
-import * as React from 'react'
+import React from 'react'
 import { Checkbox, Popover, Button } from 'antd'
 // import Button from './Button'
-import * as styled from 'styled-components'
-import * as cx from 'classnames'
-import * as storage from 'store'
+import styled from 'styled-components'
+import cx from 'classnames'
+import storage from 'store'
 // import { ColumnSuffixIcon } from '../styled/suffixIcon'
  
 // let getItemValue = item => item.value || item.dataIndex || item.key
@@ -44,6 +44,11 @@ export default class CustomColumn extends React.Component {
       columnKey: ''
     }
   }
+
+  componentDidMount() {
+    console.log('in columnFilter')
+  }
+  
  
   static getDerivedStateFromProps (nextProps, prevState) {
     const { data, onChange, columnKey } = nextProps
@@ -170,7 +175,7 @@ export default class CustomColumn extends React.Component {
       >
         {children || (
           <StyledFilterBtn
-            // type='primary'
+            type='primary'
             className={
               cx({
                 hasFilter: this.checkHasFilter()

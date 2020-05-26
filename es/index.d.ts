@@ -1,1 +1,1 @@
-export { default as ColumnFilter } from './ColumnFilter';
+export { default as ColumnFilter } from './ColumnFilter/index';

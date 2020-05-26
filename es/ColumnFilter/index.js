@@ -1,4 +1,3 @@
-"use strict";
 var __makeTemplateObject = (this && this.__makeTemplateObject) || function (cooked, raw) {
     if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
     return cooked;
@@ -16,15 +15,14 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-exports.__esModule = true;
-var React = require("react");
-var antd_1 = require("antd");
-var styled = require("styled-components");
-var cx = require("classnames");
-var storage = require("store");
+import React from 'react';
+import { Checkbox, Popover, Button } from 'antd';
+import styled from 'styled-components';
+import cx from 'classnames';
+import storage from 'store';
 var getItemValue = function (item) { return item.key || item.value || item.dataIndex; };
 var STORAGE_KEY = 'columnFilter';
-var StyledFilterBtn = styled(antd_1.Button)(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  /* padding: 0 !important;\n  width: 40px !important;\n  height: 40px !important;\n  display: flex !important;\n  justify-content: center;\n  align-items: center;\n  border: none !important;\n  background: #014F89;\n  &.hasFilter {\n    background: #014F89 !important;\n  } */\n"], ["\n  /* padding: 0 !important;\n  width: 40px !important;\n  height: 40px !important;\n  display: flex !important;\n  justify-content: center;\n  align-items: center;\n  border: none !important;\n  background: #014F89;\n  &.hasFilter {\n    background: #014F89 !important;\n  } */\n"])));
+var StyledFilterBtn = styled(Button)(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  /* padding: 0 !important;\n  width: 40px !important;\n  height: 40px !important;\n  display: flex !important;\n  justify-content: center;\n  align-items: center;\n  border: none !important;\n  background: #014F89;\n  &.hasFilter {\n    background: #014F89 !important;\n  } */\n"], ["\n  /* padding: 0 !important;\n  width: 40px !important;\n  height: 40px !important;\n  display: flex !important;\n  justify-content: center;\n  align-items: center;\n  border: none !important;\n  background: #014F89;\n  &.hasFilter {\n    background: #014F89 !important;\n  } */\n"])));
 var CustomColumn = (function (_super) {
     __extends(CustomColumn, _super);
     function CustomColumn(props) {
@@ -83,12 +81,12 @@ var CustomColumn = (function (_super) {
             var _a = _this.props.data, data = _a === void 0 ? [] : _a;
             var _b = _this.state.value, value = _b === void 0 ? [] : _b;
             var showedList = data.filter(function (item) { return !item.unfilter; });
-            return (React.createElement(antd_1.Checkbox.Group, { onChange: _this.handleChange, value: value }, showedList.map(function (item, index) {
+            return (React.createElement(Checkbox.Group, { onChange: _this.handleChange, value: value }, showedList.map(function (item, index) {
                 var value = getItemValue(item);
                 var label = item.label || item.title;
                 var disabled = !!item.disabled;
                 return (React.createElement("div", { key: value },
-                    React.createElement(antd_1.Checkbox, { style: { whiteSpace: 'nowrap' }, value: value, disabled: disabled }, label)));
+                    React.createElement(Checkbox, { style: { whiteSpace: 'nowrap' }, value: value, disabled: disabled }, label)));
             })));
         };
         _this.checkHasFilter = function () {
@@ -105,6 +103,9 @@ var CustomColumn = (function (_super) {
         };
         return _this;
     }
+    CustomColumn.prototype.componentDidMount = function () {
+        console.log('in columnFilter');
+    };
     CustomColumn.getDerivedStateFromProps = function (nextProps, prevState) {
         var data = nextProps.data, onChange = nextProps.onChange, columnKey = nextProps.columnKey;
         var columnKeyInState = prevState.columnKey, KEY = prevState.KEY;
@@ -129,11 +130,11 @@ var CustomColumn = (function (_super) {
     };
     CustomColumn.prototype.render = function () {
         var children = this.props.children;
-        return (React.createElement(antd_1.Popover, { trigger: 'click', content: this.dropDownContent(), overlayClassName: 'column-filter' }, children || (React.createElement(StyledFilterBtn, { className: cx({
+        return (React.createElement(Popover, { trigger: 'click', content: this.dropDownContent(), overlayClassName: 'column-filter' }, children || (React.createElement(StyledFilterBtn, { type: 'primary', className: cx({
                 hasFilter: this.checkHasFilter()
             }) }, "Toggle"))));
     };
     return CustomColumn;
 }(React.Component));
-exports["default"] = CustomColumn;
+export default CustomColumn;
 var templateObject_1;
