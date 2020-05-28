@@ -3,6 +3,7 @@ interface IComponentProps {
     data: IItem[];
     onChange: (list: IItem[], value: string[]) => void;
     columnKey?: string;
+    title?: string;
 }
 interface IItem {
     dataIndex: string;
@@ -13,7 +14,7 @@ interface IItem {
     [propName: string]: any;
 }
 export default class CustomColumn extends React.Component<IComponentProps, any> {
-    KEY: any;
+    KEY: string;
     constructor(props: IComponentProps);
     static getDerivedStateFromProps(nextProps: IComponentProps, prevState: any): {
         value: string[];

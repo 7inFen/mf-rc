@@ -6,7 +6,8 @@ import storage from 'store'
 interface IComponentProps {
   data: IItem[],
   onChange: (list: IItem[], value: string[]) => void,
-  columnKey?: string
+  columnKey?: string,
+  title?: string
 }
 
 interface IItem {
@@ -19,11 +20,11 @@ interface IItem {
 }
 
 let getItemValue = (item: IItem): string => item.key || item.value || item.dataIndex
- 
+
 const STORAGE_KEY = 'columnFilter'
 
 export default class CustomColumn extends React.Component<IComponentProps, any> {
-  KEY: any
+  KEY: string
   constructor(props: IComponentProps) {
     super(props)
     this.KEY = window.location.pathname
@@ -34,7 +35,7 @@ export default class CustomColumn extends React.Component<IComponentProps, any> 
       columnKey: ''
     }
   }
- 
+
   static getDerivedStateFromProps(nextProps: IComponentProps, prevState: any) {
     const { data, onChange, columnKey } = nextProps
     const { columnKey: columnKeyInState, KEY } = prevState
@@ -49,7 +50,7 @@ export default class CustomColumn extends React.Component<IComponentProps, any> 
       })
       const showedColValue = showedCol.map(item => getItemValue(item))
       // console.log(data, showedCol, hideValue)
- 
+
       onChange(showedCol, showedColValue)
       return {
         value: showedColValue,
@@ -59,12 +60,12 @@ export default class CustomColumn extends React.Component<IComponentProps, any> 
     }
     return null
   }
- 
+
   componentDidMount = () => {
     // 初始化从storage读数据
     this.initColumns()
   }
- 
+
   initColumns = () => {
     // console.log(this.props)
     const { data = [], onChange = () => { } } = this.props
@@ -90,13 +91,13 @@ export default class CustomColumn extends React.Component<IComponentProps, any> 
     })
     onChange(result, defaultValue)
   }
- 
+
   setStorage = (values: string[]): void => {
     const columnFilter = storage.get(STORAGE_KEY) || {}
     columnFilter[this.props.columnKey || this.KEY] = values
     storage.set(STORAGE_KEY, columnFilter)
   }
- 
+
   handleChange = (value: any[]): void => {
     const { data = [] } = this.props
     const showedCol: IItem[] = []
@@ -116,11 +117,11 @@ export default class CustomColumn extends React.Component<IComponentProps, any> 
     this.props.onChange(showedCol, value)
     this.setStorage(hideValue)
   }
- 
+
   dropDownContent = () => {
     const { data = [] } = this.props
     const { value = [] } = this.state
- 
+
     const showedList = data.filter(item => !item.unfilter)
     return (
       <Checkbox.Group
@@ -132,7 +133,7 @@ export default class CustomColumn extends React.Component<IComponentProps, any> 
           let disabled = !!item.disabled
           return (
             <div key={value}>
-              <Checkbox style={{ whiteSpace:'nowrap' }} value={value} disabled={disabled}>
+              <Checkbox style={{ whiteSpace: 'nowrap' }} value={value} disabled={disabled}>
                 {label}
               </Checkbox>
             </div>
@@ -141,15 +142,15 @@ export default class CustomColumn extends React.Component<IComponentProps, any> 
       </Checkbox.Group>
     )
   }
- 
+
   checkHasFilter = () => {
     const showedList = this.props.data.filter(item => !item.unfilter)
     const value = this.state.value
     return value.length < showedList.length
   }
- 
-  render () {
-    const { children } = this.props
+
+  render() {
+    const { children, title = '' } = this.props
     const renderElement: any = (
       children || (
         <Button
@@ -166,7 +167,7 @@ export default class CustomColumn extends React.Component<IComponentProps, any> 
     )
     return (
       <Popover
-        // title='选择展示项'
+        // title={title}
         // placement='topRight'
         trigger='click'
         content={this.dropDownContent()}

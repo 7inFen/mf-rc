@@ -120,7 +120,7 @@ var CustomColumn = (function (_super) {
         return null;
     };
     CustomColumn.prototype.render = function () {
-        var children = this.props.children;
+        var _a = this.props, children = _a.children, _b = _a.title, title = _b === void 0 ? '' : _b;
         var renderElement = (children || (React.createElement(Button, { type: 'primary', className: cx({
                 hasFilter: this.checkHasFilter()
             }) }, "Toggle")));
