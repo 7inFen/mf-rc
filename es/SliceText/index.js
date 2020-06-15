@@ -18,7 +18,6 @@ var getTextLength = function (text, length) {
     return [num, lengthIdx || text.length];
 };
 export default function SliceText(props) {
-    console.log(props);
     var _a = props.text, text = _a === void 0 ? '' : _a, _b = props.length, length = _b === void 0 ? 0 : _b, _c = props.showTitle, showTitle = _c === void 0 ? true : _c;
     var _d = getTextLength(text, length), textLength = _d[0], lengthIdx = _d[1];
     var resultText = text;

@@ -23,12 +23,12 @@ const getTextLength = (text = '', length = 0) => {
 }
 
 export default function SliceText(props: IProps) {
-  console.log(props)
+  // console.log(props)
   const { text = '', length = 0, showTitle = true } = props
   const [textLength, lengthIdx] = getTextLength(text, length)
   let resultText = text
   if (length && textLength > length) {
     resultText = `${text.slice(0, lengthIdx)}...`
   }
-  return <span title={showTitle ? text : '' }>{resultText}</span>
+  return <span title={showTitle ? text : ''}>{resultText}</span>
 }
